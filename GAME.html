@@ -16,10 +16,11 @@
 	var NANONAUT_Y_ACCELERATION = 1;
 	var SPACE_KEYCODE = 32;
 	var NANONAUT_JUMP_SPEED = 20;
-	var NANONAUT_X_SPEED = 300;
+	var NANONAUT_X_SPEED = 10;
 	var BACKGROUND_WIDTH = 1000;
 	var NANONAUT_NR_FRAMES_PER_ROW = 5;
 	var NANONAUT_NR_ANIMATION_FRAMES = 7;
+	var NANONAUT_ANIMATION_SPEED = 3;
 
 
 // SETUP
@@ -53,8 +54,9 @@
 	var cameraX = 0;
 	var cameraY = 0;
 
-	var nanonautFrameNr = 0;
 
+	var nanonautFrameNr = 0;
+	var gameFrameCounter = 0;
 
 	window.addEventListener('keydown', onKeyDown);
 	window.addEventListener('keyup', onKeyUp);
@@ -92,6 +94,8 @@
 
 	function update() {
 
+		gameFrameCounter = gameFrameCounter +1;
+
 		nanonautX = nanonautX + NANONAUT_X_SPEED;
 
 		if (spaceKeyIsPressed) {
@@ -114,10 +118,15 @@
 		cameraX = nanonautX - 150;
 
 		// update animation
+
+		if ((gameFrameCounter % NANONAUT_ANIMATION_SPEED) === 0) {
 		nanonautFrameNr = nanonautFrameNr + 1;
 		if ( nanonautFrameNr >= NANONAUT_NR_ANIMATION_FRAMES) {
 			nanonautFrameNr = 0;
+			}
+
 		}
+
 	}
 
 
